@@ -114,12 +114,16 @@ namespace Simd
                     {
                         float la = rb0[x];
                         float ra = rb0[p.width - x];
-                        *lf++ = p.alpha + la * lf[-1];
-                        *rf-- = p.alpha + ra * rf[+1];
+                        *lf = p.alpha + la * lf[-1];
+                        lf++;
+                        *rf = p.alpha + ra * rf[+1];
+                        rf--;
                         for (int c = 0; c < channels; c++)
                         {
-                            *lc++ = (p.alpha * (*sl++) + la * lc[-channels]);
-                            *rc-- = (p.alpha * (*sr--) + ra * rc[+channels]);
+                            *lc = (p.alpha * (*sl++) + la * lc[-channels]);
+                            lc++;
+                            *rc = (p.alpha * (*sr--) + ra * rc[+channels]);
+                            rc--;
                         }
                     }
                     SetOut<channels>(cb0, fb0, cb1, fb1, p.width, dst);

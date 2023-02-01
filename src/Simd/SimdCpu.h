@@ -166,9 +166,9 @@ namespace Simd
 #ifdef SIMD_NEON_ENABLE
     namespace Neon
     {
-        SIMD_INLINE unsigned int GetStatusWord()
+        SIMD_INLINE unsigned long int GetStatusWord()
         {
-            unsigned int dst;
+            unsigned long int dst;
 #if defined(__GNUC__)
 #if defined(SIMD_ARM64_ENABLE)
             __asm__ volatile("mrs %[dst], FPCR" : [dst] "=r" (dst));
@@ -179,7 +179,7 @@ namespace Simd
             return dst;
         }
 
-        SIMD_INLINE void SetStatusWord(unsigned int src)
+        SIMD_INLINE void SetStatusWord(unsigned long int src)
         {
 #if defined(__GNUC__)
 #if defined(SIMD_ARM64_ENABLE)
